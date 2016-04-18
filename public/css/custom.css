@@ -1,0 +1,17 @@
+@import "mixins.less";
+
+#login {
+  float: right;
+  font-size: 15px;
+  color: white;
+}
+#login a{
+  color: white;
+  text-decoration: none;
+}
+tr {
+  text-align: center;
+}
+.glyphicon {
+  cursor: pointer;
+}
