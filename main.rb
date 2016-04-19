@@ -3,14 +3,14 @@ require 'pg'
 require 'sinatra/reloader'
 require './db_config'
 require 'pry'
-require 'stripe'
+
 require 'httparty'
 
 require './models/user.rb'
 require './models/dish.rb'
 require './models/dish_type.rb'
 @@order = []
-@@menu
+@@menu = "menu"
 
 enable :sessions
 
@@ -38,7 +38,6 @@ end
 get '/order/:id' do
   @dish = Dish.all
   @@order << params[:id]
-  puts @@menu
   erb :menu
 end
 
@@ -66,15 +65,6 @@ delete '/session' do
 	session[:user_id] = nil
   @@order = []
 	redirect to '/'
-end
-
-get '/new' do
-  erb :new
-end
-
-post '/newuser' do
-  User.create(username: params[:username],email: params[:email], password: params[:password])
-  erb :index
 end
 
 get '/Breakfast' do
@@ -107,14 +97,30 @@ get '/Kids' do
   erb :menu
 end
 
-post '/cart' do
+get '/cart' do
+  erb :cart
+end
+
+post '/checkout' do
   if logged_in?
-    erb :cart
+    erb :checkout
   else
     erb :login
   end
 end
 
-post '/checkout' do
-  erb :checkout
+get '/securesession' do
+  @user = current_user
+  erb :securecheckout
+end
+
+get '/signup' do
+  # User.create(username: params[:username],email: params[:email], password: params[:password])
+  erb :new
+end
+
+post '/newuser' do
+  @dish = Dish.all
+  User.create(username: params[:username],email: params[:email], password: params[:password])
+  erb :menu
 end
