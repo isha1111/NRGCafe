@@ -7,4 +7,4 @@ require './db_config'
 require './models/dish'
 require './models/dish_type'
 require './models/user'
-# binding.pry
+binding.pry

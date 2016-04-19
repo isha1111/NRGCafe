@@ -9,6 +9,9 @@
   color: white;
   text-decoration: none;
 }
+label {
+  color: white;
+}
 tr {
   text-align: center;
 }

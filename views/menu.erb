@@ -1,23 +1,56 @@
-    <div class="container">
-        <div class="row">
-            <div class="box">
-                <div class="col-lg-12">
-                    <hr>
-                    <h2 class="intro-text text-center">Menu
-                    </h2>
-                    <hr>
-                </div>
-                <div class="col-lg-12 text-center">
-                  <% @dish.each do |dish| %>
-                      <span calss="menu_item"> <%= dish.name %> </span> <%= dish.price %>
-                      <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"> </span></br>
-                  <% end %>
-                </div>
-                <div class="col-lg-12 text-center">
+<a class="glyphicon glyphicon-shopping-cart" aria-hidden="true" href="/cart">  <%= @@order.size %> </a>
+<div class="container">
+    <div class="row">
+        <div class="box">
+            <div class="col-lg-12">
+                <hr>
+                <h2 class="intro-text text-center">Menu
+                </h2>
+                <hr>
+                <a href="/Breakfast">Breakfast</a>
+                <a href="/Starter">Starter</a>
+                <a href="/Lunch">Lunch</a>
+                <a href="/Salad">Salad</a>
+                <a href="/Kids">Kids</a>
+            </div>
+            <div class="col-lg-12 text-center">
 
-                </div>
+              <% if @@menu == "Breakfast" %>
+                <% @dish.each do |dish| %>
+                    <span class="menu_item"> <%= dish.name %> </span> <%= dish.price %>
+                    <a class="glyphicon glyphicon-plus-sign" aria-hidden="true" href="/order/<%= dish.id %>"> </a></br>
+                <% end %>
+              <% elsif @@menu == "Starter" %>
+                <% @dish.each do |dish| %>
+                    <span class="menu_item"> <%= dish.name %> </span> <%= dish.price %>
+                    <a class="glyphicon glyphicon-plus-sign" aria-hidden="true" href="/order/<%= dish.id %>"> </a></br>
+                <% end %>
+              <% elsif @@menu == "Lunch" %>
+                <% @dish.each do |dish| %>
+                    <span class="menu_item"> <%= dish.name %> </span> <%= dish.price %>
+                    <a class="glyphicon glyphicon-plus-sign" aria-hidden="true" href="/order/<%= dish.id %>"> </a></br>
+                <% end %>
+              <% elsif @@menu == "Salad" %>
+                <% @dish.each do |dish| %>
+                    <span class="menu_item"> <%= dish.name %> </span> <%= dish.price %>
+                    <a class="glyphicon glyphicon-plus-sign" aria-hidden="true" href="/order/<%= dish.id %>"> </a></br>
+                <% end %>
+              <% elsif @@menu == "Kids" %>
+                <% @dish.each do |dish| %>
+                    <span class="menu_item"> <%= dish.name %> </span> <%= dish.price %>
+                    <a class="glyphicon glyphicon-plus-sign" aria-hidden="true" href="/order/<%= dish.id %>"> </a></br>
+                <% end %>
+              <% elsif @@menu == "menu" %>
+                <% @dish.each do |dish| %>
+                    <span class="menu_item"> <%= dish.name %> </span> <%= dish.price %>
+                    <a class="glyphicon glyphicon-plus-sign" aria-hidden="true" href="/order/<%= dish.id %>"> </a></br>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="col-lg-12 text-center">
+
             </div>
         </div>
-
     </div>
-    <!-- /.container -->
+</div>
+<!-- /.container -->
