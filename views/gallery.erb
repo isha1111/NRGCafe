@@ -1,12 +1,88 @@
-<nav>
-  <ul>
+<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="jquery.bsPhotoGallery.js"></script>
+<script>
+  (function(){
+  	"use strict";
+  	var clicked = {};
+  	function showModal(){
+  			var src = $(this).attr('src');
+  			var img = '<img src="' + src + '" class="img-responsive"/>';
+  			var index = $(this).parent('li').attr('data-index');
+  			clicked.prevImg = parseInt(index) - parseInt(1);
+  			clicked.nextImg = parseInt(index) + parseInt(1);
+  			var html = '';
+  			html += img;
+  			html += '<div style="height:25px;clear:both;display:block;">';
+  			// html += '<a class="controls next" href="'+ (clicked.nextImg) + '">next &raquo;</a>';
+  			// html += '<a class="controls previous" href="' + (clicked.prevImg) + '">&laquo; prev</a>';
+  			html += '</div>';
+  			$('#myModal').modal();
+  			$('#myModal').on('shown.bs.modal', function(){
+  					$('#myModal .modal-body').html(html);
+  					showHideControls();
+  			})
+  			$('#myModal').on('hidden.bs.modal', function(){
+  					$('#myModal .modal-body').html('');
+  			});
+  	}
+  	function nextPrevHandler(){
+  			var index = $(this).attr('href');
+  			var src = $('li[data-index="'+index+'"] img').attr('src');
+  			$('.modal-body img').attr('src', src);
+  			clicked.prevImg = parseInt(index) - 1;
+  			clicked.nextImg = parseInt(clicked.prevImg) + 2;
+  			if($(this).hasClass('previous')){
+  				$(this).attr('href', clicked.prevImg);
+  				$('a.next').attr('href', clicked.nextImg);
+  			}else{
+  				$(this).attr('href', clicked.nextImg);
+  				$('a.previous').attr('href', clicked.prevImg);
+  			}
+  		showHideControls();
+  		return false;
+  	}
+  	function showHideControls(){
+  		var total = ($('li').not('.clearfix').length);
+  		if(total === clicked.nextImg){
+  			$('a.next').hide();
+  		}else{
+  			$('a.next').show()
+  		}
+  		if(clicked.prevImg === -1){
+  			$('a.previous').hide();
+  		}else{
+  			$('a.previous').show()
+  		}
+  	}
+  	$(document).ready(function(){
+  		$(this).on('click', 'a.controls', nextPrevHandler);
+  		$('li').not('.clearfix').each(function(i){
+  					$(this).attr('data-index',i);
+  					var img = $(this).find('img');
+  					img.on('click',showModal);
+  		});
+  	}) //end doc ready
+  })();
+  </script>
+<ul class="row first">
+    <li>
       <% @dish.each do |dish| %>
       <% if dish.photo != "" %>
-      <li style="display:inline;">
-        <img class="gallery-td" id= <%= dish.name %> src= <%= dish.photo %> >
-        
-      </li>
+        <img class="gallery-td" src= <%= dish.photo %> >
       <% end %>
       <% end %>
-  </ul>
-</nav>
+    </li>
+</ul>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"  >&times;</button>
+      </div>
+      <div class="modal-body">
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>

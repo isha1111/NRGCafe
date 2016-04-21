@@ -1,6 +1,17 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
+    json (1.8.1)
+    mail (2.6.4)
+      mime-types (>= 1.16, < 4)
+    mime-types (2.99.1)
+    multi_xml (0.5.5)
+    pg (0.18.4)
+    pony (1.11)
+      mail (>= 2.0)
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
@@ -8,13 +19,19 @@ GEM
       rack (~> 1.5)
       rack-protection (~> 1.4)
       tilt (>= 1.3, < 3)
+    sinatra-flash (0.3.0)
+      sinatra (>= 1.0.0)
     tilt (2.0.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  httparty
+  pg
+  pony
   sinatra
+  sinatra-flash
 
 BUNDLED WITH
    1.11.2

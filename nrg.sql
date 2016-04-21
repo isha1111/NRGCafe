@@ -62,5 +62,3 @@ INSERT INTO dish_types (dish_type) VALUES ('starter');
 INSERT INTO dish_types (dish_type) VALUES ('lunch');
 INSERT INTO dish_types(dish_type) VALUES ('salad');
 INSERT INTO dish_types(dish_type) VALUES ('kids');
-
-UPDATE dishes SET photo = 'http://thedeluxerestaurant.com/wp-content/uploads/2013/11/Salad.jpg' where name = 'Greek Salad';

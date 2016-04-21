@@ -1,12 +1,10 @@
 require 'sinatra'
 require 'pg'
-require './db_config'
-require 'pry'
 require 'sinatra/flash'
-require 'sinatra/reloader'
 require 'pony'
 require 'httparty'
 
+require './db_config'
 require './models/user.rb'
 require './models/dish.rb'
 require './models/dish_type.rb'

@@ -41,7 +41,7 @@ button {
 .label {
   color: black;
 }
-@media(max-width:1000px) {
+@media(max-width:1100px) {
   .label {
     display: block;
     padding-top: 4px;
@@ -51,6 +51,15 @@ button {
     margin: 0 auto;
     text-align: center;
   }
+  #signUpBtn, #loginBtn {
+    display: inline;
+  }
+ button {
+  margin: 10px auto;
+}
+}
+.modal {
+  margin-top: 150px;
 }
 @media (max-width:800px) {
 .navbar-brand {
@@ -68,7 +77,7 @@ button {
 }
 
 .gallery-td {
-  padding: 20px 10px;
+  padding: 20px 20px;
   max-width: 300px;
   max-height: 200px;
   display: inline-block;
