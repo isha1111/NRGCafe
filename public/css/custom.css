@@ -1,20 +1,55 @@
-@import "mixins.less";
 
 #login {
   float: right;
   font-size: 15px;
   color: white;
 }
-#login a{
+#login a {
   color: white;
   text-decoration: none;
 }
 label {
-  color: white;
+  color: black;
+}
+.form-row {
+  text-align: left;
+  padding: 2px 250px;
 }
 tr {
   text-align: center;
 }
 .glyphicon {
   cursor: pointer;
+  font-size: 22px;
+  padding-top: 5px;
+}
+label:after {
+    content: "*";
+    font-size: 10px;
+    padding-left: 5px;
+    color: red;
+}
+button {
+  margin-top: 20px;
+}
+.label {
+  color: black;
+}
+@media(max-width:1000px) {
+  .label {
+    display: block;
+    padding-top: 4px;
+  }
+  form {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+  }
+}
+.gallery {
+  max-width: 300px;
+  max-height: 200px;
+}
+.gallery-td {
+  padding: 20px 10px;
 }

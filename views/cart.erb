@@ -10,7 +10,9 @@
                   <% sum = 0 %>
                   <% @@order.each do |id| %>
                       <% added_dish = Dish.find_by(id: id) %>
-                      <%= added_dish.name %> <%= added_dish.price %> <br>
+                      <%= added_dish.name %> <%= added_dish.price %>
+                      <a href="/delete/<%= added_dish.id %>"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a>
+                      <br>
                       <% sum += added_dish.price.to_f %>
                   <% end %>
                   Total is $<%= sum %>

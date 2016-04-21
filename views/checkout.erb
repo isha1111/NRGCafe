@@ -7,16 +7,16 @@
                 </h2>
                 <hr>
                 <div class="col-lg-12 text-center">
-                  <% sum = 0 %>
+                  <% sum = 00 %>
                   <% @@order.each do |id| %>
                       <% added_dish = Dish.find_by(id: id) %>
                       <%= added_dish.name %> <%= added_dish.price %> <br>
                       <% sum += added_dish.price.to_f %>
                   <% end %>
-                  Total is $<%= sum %>
+                  Total is $<%= sum.to_f %>
                   <hr>
                   Do You want to continue checkout
-                  <form action="/securesession"><button>Yes</button></form>
+                  <form action="/securesession/<%= sum.to_f %>"><button>Yes</button></form>
                   <form action="/menu"><button>No</button></form>
                 </div>
             </div>

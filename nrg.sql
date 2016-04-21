@@ -23,17 +23,40 @@ CREATE TABLE users(
   password_digest VARCHAR(100) NOT NULL
 );
 
+-- CREATE TABLE orders(
+--   id serial4 PRIMARY KEY,
+--   user_username VARCHAR(10) NOT NULL,
+--   dish_names VARCHAR(500) NOT NULL
+-- );
 CREATE TABLE orders(
   id serial4 PRIMARY KEY,
   user_username VARCHAR(10) NOT NULL,
-  dish_names VARCHAR(500) NOT NULL
+  time VARCHAR(40)
 );
+
+CREATE TABLE dish_orders(
+  id serial4 PRIMARY KEY,
+  dish_id INTEGER,
+  order_id INTEGER
+);
+
 
 INSERT INTO dishes(name,description,price,photo,dish_type_id) VALUES ('Spaghetti Chilli Prawns','Spaghetti with prawns salmon and parmeson crisps','16.90','','3');
 INSERT INTO dishes(name,description,price,photo,dish_type_id) VALUES ('Fettucine Chicken Avocado','Fettucine with Chicken,avocado and parmeson crisps','14.50','','3');
-INSERT INTO dishes(name,description,price,photo,dish_type_id) VALUES ('Big Breakfast','Eggs, Toast, Hashbrown, sausage, Tomato, Mush, Bacon, and Beans','16.90','','3');
-INSERT INTO dishes(name,description,price,photo,dish_type_id) VALUES ('Plain Toats','two piece of toast with butter/jam/vegimite','4.50','','1');
+INSERT INTO dishes(name,description,price,photo,dish_type_id) VALUES ('Big Breakfast','Eggs, Toast, Hashbrown, sausage, Tomato, Mush, Bacon, and Beans','16.90','','1');
+INSERT INTO dishes(name,description,price,photo,dish_type_id) VALUES ('Plain Toast','two piece of toast with butter/jam/vegimite','4.50','','1');
 INSERT INTO dishes(name,description,price,photo,dish_type_id) VALUES ('Fruit Toast','two piece of Raisin toast with butter/jam/vegimite','5.50','','1');
+INSERT INTO dishes(name,description,price,photo,dish_type_id) VALUES ('Fish & Chips','Fish with chips and salad','16.50','','3');
+INSERT INTO dishes(name,description,price,photo,dish_type_id) VALUES ('Chicken Parmigiana','Parmigiana with chips and salad','16.50','','3');
+INSERT INTO dishes(name,description,price,photo,dish_type_id) VALUES ('Fruit Bowl','Fresh fruits with yoghurt','8.50','','1');
+INSERT INTO dishes(name,description,price,photo,dish_type_id) VALUES ('Spanish Eggs','Bacon Chorizo Beans with spices and eggs','16.50','','1');
+INSERT INTO dishes(name,description,price,photo,dish_type_id) VALUES ('Kids fish chips','fish with chips','8.50','','5');
+INSERT INTO dishes(name,description,price,photo,dish_type_id) VALUES ('Chicken and veg soup','soup','9.50','','2');
+INSERT INTO dishes(name,description,price,photo,dish_type_id) VALUES ('Pumpkin soup','soup','9.50','','2');
+INSERT INTO dishes(name,description,price,photo,dish_type_id) VALUES ('Garden Salad','soup','12.50','','4');
+INSERT INTO dishes(name,description,price,photo,dish_type_id) VALUES ('Greek Salad','Veggeies with feeta and dressing','13.50','','4');
+INSERT INTO dishes(name,description,price,photo,dish_type_id) VALUES ('Chicken Avocade Salad','Veggeies with chicken and avocado','15.50','','4');
+INSERT INTO dishes(name,description,price,photo,dish_type_id) VALUES ('Kids Pancake','Pancake with maple syrup and ice cream','8.50','','5');
 INSERT INTO dish_types (dish_type) VALUES ('breakfast');
 INSERT INTO dish_types (dish_type) VALUES ('starter');
 INSERT INTO dish_types (dish_type) VALUES ('lunch');

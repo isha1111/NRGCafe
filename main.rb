@@ -3,14 +3,17 @@ require 'pg'
 require 'sinatra/reloader'
 require './db_config'
 require 'pry'
-
+require 'sinatra/flash'
+require 'pony'
 require 'httparty'
 
 require './models/user.rb'
 require './models/dish.rb'
 require './models/dish_type.rb'
+require './models/order.rb'
+require './models/dish_order.rb'
+
 @@order = []
-@@menu = "menu"
 
 enable :sessions
 
@@ -31,18 +34,47 @@ end
 
 get '/menu' do
   @dish = Dish.all
-  @@menu = "menu"
+  @dishtype = DishType.all
   erb :menu
+end
+
+get '/contact' do
+  erb :contact
+end
+post '/contact' do
+	Pony.mail({
+:from => params[:email],
+  :to => 'isha.negi19@gmail.com',
+  :subject => "Enquiry has been submitted!",
+  :body => "#{params[:fname]} has made an enquiry. Please contact on number #{params[:phone]}",
+  :via => :smtp,
+  :via_options => {
+   :address              => 'smtp.gmail.com',
+   :port                 => '587',
+   :enable_starttls_auto => true,
+   :user_name            => 'johnmann778@gmail.com',
+   :password             => 'password18*',
+   :authentication       => :plain,
+   :domain               => "localhost.localdomain"
+   }
+  })
+	flash[:notice] = "Your Enquiry has been submitted successfully!!"
+	redirect to '/'
+end
+
+get '/gallery' do
+	erb :gallery
 end
 
 get '/order/:id' do
-  @dish = Dish.all
-  @@order << params[:id]
-  erb :menu
-end
-
-get '/cart' do
-  erb :cart
+  if logged_in?
+      @dish = Dish.all
+      @dishtype = DishType.all
+      @@order << params[:id]
+      erb :menu
+    else
+      erb :login
+    end
 end
 
 get '/signin' do
@@ -50,14 +82,15 @@ get '/signin' do
 end
 
 post '/session' do
-  user = User.find_by(email: params[:email])
+  user = User.find_by(username: params[:username])
 	if user && user.authenticate(params[:password])
 		#user exsits and password is correcct and page is redirected
 		session[:user_id] = user.id
 		redirect to '/'
 	else
 		#page is not redirected
-		erb :login
+		flash[:notice] = "Username or Password is Incorrect !!"
+		redirect to '/signin'
 	end
 end
 
@@ -67,33 +100,16 @@ delete '/session' do
 	redirect to '/'
 end
 
-get '/Breakfast' do
-  @@menu = "Breakfast"
-  @dish = Dish.where(dish_type_id: 1)
-  erb :menu
+get '/history' do
+	@dish = Dish.all
+	@user = current_user.username
+	@order = Order.where(user_username: @user)
+  erb :history
 end
 
-get '/Starter' do
-  @@menu = "Starter"
-  @dish = Dish.where(dish_type_id: 2)
-  erb :menu
-end
-
-get '/Lunch' do
-  @@menu = "Lunch"
-  @dish = Dish.where(dish_type_id: 3)
-  erb :menu
-end
-
-get '/Salad' do
-  @@menu = "Salad"
-  @dish = Dish.where(dish_type_id: 4)
-  erb :menu
-end
-
-get '/Kids' do
-  @@menu = "Kids"
-  @dish = Dish.where(dish_type_id: 5)
+get '/menu/:id' do
+  @dish = Dish.where(dish_type_id: params[:id])
+  @dishtype = DishType.all
   erb :menu
 end
 
@@ -109,9 +125,43 @@ post '/checkout' do
   end
 end
 
-get '/securesession' do
+get '/securesession/:total' do
   @user = current_user
+  dish = []
+	@total = params[:total].to_f
+  @@order.each do |id|
+    dish << Dish.find_by(id: id).name
+  end
+  order = Order.new
+	order.user_username = @user.username
+	order.time = Time.now.strftime("%d/%m/%Y %H:%M")
+	@@order.each do |id|
+	order.dishes << Dish.find(id)
+	end
+	order.save
+	Pony.mail({
+:from => params[:email],
+	:to => 'isha.negi19@gmail.com',
+	:subject => "Order has been made!!",
+	:body => "#{params[:fname]} has made an enquiry. Please contact on number #{params[:phone]}",
+	:via => :smtp,
+	:via_options => {
+	 :address              => 'smtp.gmail.com',
+	 :port                 => '587',
+	 :enable_starttls_auto => true,
+	 :user_name            => 'johnmann778@gmail.com',
+	 :password             => 'password18*',
+	 :authentication       => :plain,
+	 :domain               => "localhost.localdomain"
+	 }
+	})
+
   erb :securecheckout
+end
+
+post '/securesession/:total' do
+	@@order = []
+  erb :success
 end
 
 get '/signup' do
@@ -121,6 +171,34 @@ end
 
 post '/newuser' do
   @dish = Dish.all
-  User.create(username: params[:username],email: params[:email], password: params[:password])
-  erb :menu
+	@dishtype = DishType.all
+	u = User.new
+	u.username = params[:username]
+	u.password = params[:password]
+	u.email =params[:email]
+	u.save
+  # user = User.create(username: params[:username],email: params[:email], password: params[:password])
+	if u.valid?
+		user = User.find_by(username: params[:username])
+		session[:user_id] = user.id
+		erb :menu
+	else
+		flash[:error] = "Username Already Exists"
+		redirect to '/signup'
+	end
+
+  # if user && user.authenticate(params[:password])
+  #   #user exsits and password is correcct and page is redirected
+  #   session[:user_id] = user.id
+	# 	erb :menu
+  # else
+  #   erb :new
+  # end
+
+end
+
+get '/delete/:id' do
+  index = @@order.index(params[:id])
+  @@order.delete_at(index)
+  erb :cart
 end
