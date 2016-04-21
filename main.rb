@@ -3,6 +3,7 @@ require 'pg'
 require './db_config'
 require 'pry'
 require 'sinatra/flash'
+require 'sinatra/reloader'
 require 'pony'
 require 'httparty'
 
@@ -138,11 +139,20 @@ get '/securesession/:total' do
 	order.dishes << Dish.find(id)
 	end
 	order.save
+  erb :securecheckout
+end
+
+post '/securesession/:total' do
+
+	dish = []
+	@@order.each do |id|
+		dish << Dish.find_by(id: id).name
+	end
 	Pony.mail({
-	:from => @user.username,
+	:from => current_user.username,
 	:to => 'isha.negi19@gmail.com',
 	:subject => "Cafe NRG - Order has been made!!",
-	:body => "#{@user.username} has made an order for #{dish.join(",")}",
+	:body => "#{current_user.username} has made an order for #{dish.join(",")}",
 	:via => :smtp,
 	:via_options => {
 	 :address              => 'smtp.gmail.com',
@@ -154,10 +164,6 @@ get '/securesession/:total' do
 	 :domain               => "localhost.localdomain"
 	 }
 	})
-  erb :securecheckout
-end
-
-post '/securesession/:total' do
 	@@order = []
 	flash[:notice] = "Order placed successfully !!"
 	redirect to '/'
