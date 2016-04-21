@@ -19,6 +19,7 @@
     <!-- Fonts -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+    <script src="gen_validatorv4.js" type="text/javascript"></script>
 
 </head>
 
@@ -58,7 +59,25 @@
                 </button>
                 <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
                   <a class="navbar-brand" href="index.html">Business Casual</a>
+                  <div id ="navbar-toggle-login">
+                    <% if logged_in? %>
+                      <form action="/session" method="post" class="layout-form">
+                      <input value="delete" type="hidden" name="_method">
+                      <a class="glyphicon glyphicon-shopping-cart" aria-hidden="true" href="/cart"><sup><sup><%= @@order.size %></sup></sup></a>
+                      <a href="/history" style="font-size:15px;">Recent Orders</a>
+                      <button class="label">Log Out</button>
+                      </form>
 
+                    <% else %>
+                      <form action="/signin" method="get" class="layout-form">
+                      <button type="submit" class="label">Log In</button>
+                      </form>
+                      <form action="/signup" method="get" class="layout-form">
+                      <button type="submit" class="label" >Sign Up</button>
+                      </form>
+                    <% end %>
+
+                  </div>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->

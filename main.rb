@@ -1,6 +1,5 @@
-require 'sinatra' 
+require 'sinatra'
 require 'pg'
-require 'sinatra/reloader'
 require './db_config'
 require 'pry'
 require 'sinatra/flash'
@@ -142,7 +141,7 @@ get '/securesession/:total' do
 	Pony.mail({
 	:from => @user.username,
 	:to => 'isha.negi19@gmail.com',
-	:subject => "Order has been made!!",
+	:subject => "Cafe NRG - Order has been made!!",
 	:body => "#{@user.username} has made an order for #{dish.join(",")}",
 	:via => :smtp,
 	:via_options => {
