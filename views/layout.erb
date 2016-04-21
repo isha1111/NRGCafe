@@ -25,7 +25,7 @@
 <body>
     <div id ="login">
       <% if logged_in? %>
-        <form action="/session" method="post">
+        <form action="/session" method="post" class="layout-form">
         <input value="delete" type="hidden" name="_method">
         <a class="glyphicon glyphicon-shopping-cart" aria-hidden="true" href="/cart"><sup><sup><%= @@order.size %></sup></sup></a>
         <a href="/history" style="font-size:15px;">Recent Orders</a>
@@ -33,18 +33,17 @@
         </form>
 
       <% else %>
-        <form action="/signin" method="get">
+        <form action="/signin" method="get" class="layout-form">
         <button type="submit" class="label">Log In</button>
         </form>
-        <form action="/signup" method="get">
-        <button type="submit" class="label">Sign Up</button>
+        <form action="/signup" method="get" class="layout-form">
+        <button type="submit" class="label" >Sign Up</button>
         </form>
       <% end %>
 
     </div>
     <div class="brand">Cafè NRG</div>
     <div class="address-bar">11 Douglas Parade, Williamstown, VIC 3016</div>
-
     <!-- Navigation -->
     <nav class="navbar navbar-default" role="navigation">
         <div class="container">
@@ -59,21 +58,7 @@
                 </button>
                 <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
                   <a class="navbar-brand" href="index.html">Business Casual</a>
-                  <% if logged_in? %>
-                    <form action="/session" method="post">
-                    <input value="delete" type="hidden" name="_method">
-                    <a class="glyphicon glyphicon-shopping-cart" aria-hidden="true" href="/cart" ><sup><sup><%= @@order.size %></sup></sup></a>
-                    <a href="/history" style="font-size:15px;">Recent Orders</a>
-                    <button class="label">Log Out</button>
-                    </form>
-                  <% else %>
-                    <form action="/signin" method="get">
-                    <button type="submit" class="label">Log In</button>
-                    </form>
-                    <form action="/signup" method="get">
-                    <button type="submit" class="label">Sign Up</button>
-                    </form>
-                  <% end %>
+
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -96,9 +81,9 @@
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
-    </nav>
 
-    <% if flash[:notice] %>
+    </nav>
+      <% if flash[:notice] %>
       <div class="notice" style="text-align:center; padding-bottom: 10px; color:white;"><%= flash[:notice] %></div>
     <% end %>
 
@@ -121,12 +106,7 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
     <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.8.1/jquery.validate.min.js"></script>
     <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
-    <!-- Script to Activate the Carousel -->
-    <script>
-    $('.carousel').carousel({
-        interval: 5000 //changes the speed
-    })
-    </script>
+
 
 </body>
 

@@ -1,4 +1,4 @@
-require 'sinatra'
+require 'sinatra' 
 require 'pg'
 require 'sinatra/reloader'
 require './db_config'
@@ -140,10 +140,10 @@ get '/securesession/:total' do
 	end
 	order.save
 	Pony.mail({
-:from => params[:email],
+	:from => @user.username,
 	:to => 'isha.negi19@gmail.com',
 	:subject => "Order has been made!!",
-	:body => "#{params[:fname]} has made an enquiry. Please contact on number #{params[:phone]}",
+	:body => "#{@user.username} has made an order for #{dish.join(",")}",
 	:via => :smtp,
 	:via_options => {
 	 :address              => 'smtp.gmail.com',
@@ -155,13 +155,13 @@ get '/securesession/:total' do
 	 :domain               => "localhost.localdomain"
 	 }
 	})
-
   erb :securecheckout
 end
 
 post '/securesession/:total' do
 	@@order = []
-  erb :success
+	flash[:notice] = "Order placed successfully !!"
+	redirect to '/'
 end
 
 get '/signup' do

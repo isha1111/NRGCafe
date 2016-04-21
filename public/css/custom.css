@@ -8,6 +8,9 @@
   color: white;
   text-decoration: none;
 }
+.layout-form {
+  display: inline;
+}
 label {
   color: black;
 }
