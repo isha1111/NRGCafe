@@ -66,10 +66,10 @@ button {
 }
 
 }
-.gallery {
-  max-width: 300px;
-  max-height: 200px;
-}
+
 .gallery-td {
   padding: 20px 10px;
+  max-width: 300px;
+  max-height: 200px;
+  display: inline-block;
 }

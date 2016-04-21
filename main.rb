@@ -63,6 +63,7 @@ post '/contact' do
 end
 
 get '/gallery' do
+	@dish = Dish.all
 	erb :gallery
 end
 

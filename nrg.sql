@@ -54,11 +54,13 @@ INSERT INTO dishes(name,description,price,photo,dish_type_id) VALUES ('Kids fish
 INSERT INTO dishes(name,description,price,photo,dish_type_id) VALUES ('Chicken and veg soup','soup','9.50','','2');
 INSERT INTO dishes(name,description,price,photo,dish_type_id) VALUES ('Pumpkin soup','soup','9.50','','2');
 INSERT INTO dishes(name,description,price,photo,dish_type_id) VALUES ('Garden Salad','soup','12.50','','4');
-INSERT INTO dishes(name,description,price,photo,dish_type_id) VALUES ('Greek Salad','Veggeies with feeta and dressing','13.50','','4');
-INSERT INTO dishes(name,description,price,photo,dish_type_id) VALUES ('Chicken Avocade Salad','Veggeies with chicken and avocado','15.50','','4');
-INSERT INTO dishes(name,description,price,photo,dish_type_id) VALUES ('Kids Pancake','Pancake with maple syrup and ice cream','8.50','','5');
+INSERT INTO dishes(name,description,price,photo,dish_type_id) VALUES ('Greek Salad','Veggeies with feeta and dressing','13.50','http://thedeluxerestaurant.com/wp-content/uploads/2013/11/Salad.jpg','4');
+INSERT INTO dishes(name,description,price,photo,dish_type_id) VALUES ('Chicken Avocade Salad','Veggeies with chicken and avocado','15.50','https://www.liverdoctor.com/wp-content/uploads/2015/04/chicken-pumpkin-salad-w-660x330.jpg','4');
+INSERT INTO dishes(name,description,price,photo,dish_type_id) VALUES ('Kids Pancake','Pancake with maple syrup and ice cream','8.50','http://www.cookrepublic.com/images/photojournal/pancakes03.jpg','5');
 INSERT INTO dish_types (dish_type) VALUES ('breakfast');
 INSERT INTO dish_types (dish_type) VALUES ('starter');
 INSERT INTO dish_types (dish_type) VALUES ('lunch');
 INSERT INTO dish_types(dish_type) VALUES ('salad');
 INSERT INTO dish_types(dish_type) VALUES ('kids');
+
+UPDATE dishes SET photo = 'http://thedeluxerestaurant.com/wp-content/uploads/2013/11/Salad.jpg' where name = 'Greek Salad';

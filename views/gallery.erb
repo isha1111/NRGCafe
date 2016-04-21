@@ -1,20 +1,12 @@
-<table>
-  <tr>
-    <td class="gallery-td"><img class="gallery" src="http://honestcooking.com/wp-content/uploads/2013/02/400.jpg"></td>
-    <td class="gallery-td"><img src="https://www.plateful.com.au/~/media/Plateful/Images/Recipes/Latina%20Fresh/Sauces/2014-05_recipe_latina-fresh_spanish-style-baked-eggs-with-latina-tomato-chorizo-and-chilli-stir-through-sauce_920x920.ashx?la=en&hash=121AF5FC73A9C807FE298A16C4DBE9B1C599F89C" class="gallery"></td>
-    <td class="gallery-td"><img src="http://images.edge-generalmills.com/c3b84368-cd16-4d0b-a659-9bcaf1d4c2b8.jpg" class="gallery"></td>
-    <td class="gallery-td"><img src="http://images.edge-generalmills.com/42a8d7ed-54ac-486c-bc4d-3e4d6b93bce3.jpg" class="gallery"></td>
-  </tr>
-  <tr>
-    <td class="gallery-td"><img class="gallery" src="http://www.ventura-homes.com.au/livebetter/wp-content/uploads/2015/07/zenos-cafe-hillarys-chicken-parmi.jpg"></td>
-    <td class="gallery-td"><img src="https://atebyatescrapbooking.files.wordpress.com/2012/11/dscn9802.jpg" class="gallery"></td>
-    <td class="gallery-td"><img src="http://stonefiregrill.com/wp-content/uploads/2014/08/SFG-Menu-Garden-Salad.jpg" class="gallery"></td>
-    <td class="gallery-td"><img src="https://athleticperformancetc.files.wordpress.com/2014/06/img_17241.jpg" class="gallery"></td>
-  </tr>
-  <tr>
-    <td class="gallery-td"><img class="gallery" src="http://farm8.staticflickr.com/7105/7237535962_0ae3b02942_c.jpg"></td>
-    <td class="gallery-td"><img src="https://c2.staticflickr.com/8/7416/8777910107_231af75382_b.jpg" class="gallery"></td>
-    <td class="gallery-td"><img src="http://cf.cravingsofalunatic.com/wp-content/uploads/2015/01/Mixed-Berry-Smoothie-6-1024x682.jpg" class="gallery"></td>
-    <td class="gallery-td"><img src="http://cookdiary.net/wp-content/uploads/images/Vegetable-Lasagne_9061.jpg" class="gallery"></td>
-  </tr>
-</table>
+<nav>
+  <ul>
+      <% @dish.each do |dish| %>
+      <% if dish.photo != "" %>
+      <li style="display:inline;">
+        <img class="gallery-td" id= <%= dish.name %> src= <%= dish.photo %> >
+        
+      </li>
+      <% end %>
+      <% end %>
+  </ul>
+</nav>
