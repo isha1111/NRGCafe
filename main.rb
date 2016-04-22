@@ -15,6 +15,7 @@ require './models/dish_order.rb'
 
 enable :sessions
 
+# helpers to define methods
 helpers do
 	def current_user
 		User.find_by(id: session[:user_id])
@@ -26,19 +27,24 @@ helpers do
 
 end
 
+# shows the main page
 get '/' do
   erb :index
 end
 
+# shows the menu page
 get '/menu' do
   @dish = Dish.all
   @dishtype = DishType.all
   erb :menu
 end
 
+# shows the contact page
 get '/contact' do
   erb :contact
 end
+
+# shows the confirmation page after the data has been submitted via form
 post '/contact' do
 	Pony.mail({
 	:from => params[:email],
@@ -56,15 +62,18 @@ post '/contact' do
    :domain               => "localhost.localdomain"
    }
   })
+	# flash the notice about the success
 	flash[:notice] = "Your Enquiry has been submitted successfully!!"
 	redirect to '/'
 end
 
+# shows the gallery page
 get '/gallery' do
 	@dish = Dish.all
 	erb :gallery
 end
 
+# add dishes to cart if user is logged in or takes the user to login page
 get '/order/:id' do
   if logged_in?
       @dish = Dish.all
@@ -76,10 +85,12 @@ get '/order/:id' do
     end
 end
 
+# shows the login page
 get '/signin' do
   erb :login
 end
 
+# authenticate the user and logs them in otherwise redirects to same page and flash error
 post '/session' do
   user = User.find_by(username: params[:username])
 	if user && user.authenticate(params[:password])
@@ -93,12 +104,14 @@ post '/session' do
 	end
 end
 
+# delete session when logged out
 delete '/session' do
 	session[:user_id] = nil
   @@order = []
 	redirect to '/'
 end
 
+# show the previous order placed by the user
 get '/history' do
 	@dish = Dish.all
 	@user = current_user.username
@@ -106,16 +119,19 @@ get '/history' do
   erb :history
 end
 
+# adds the dish to cart and stores in variable @data
 get '/menu/:id' do
   @dish = Dish.where(dish_type_id: params[:id])
   @dishtype = DishType.all
   erb :menu
 end
 
+# shows the cart page
 get '/cart' do
   erb :cart
 end
 
+# shows the checkout page
 post '/checkout' do
   if logged_in?
     erb :checkout
@@ -124,6 +140,7 @@ post '/checkout' do
   end
 end
 
+# asks the user if the wish to checkout and resirects to secure checkout page
 get '/securesession/:total' do
   @user = current_user
   dish = []
@@ -141,12 +158,13 @@ get '/securesession/:total' do
   erb :securecheckout
 end
 
+# securely checkout the cart items and save the dat in database
 post '/securesession/:total' do
-
 	dish = []
 	@@order.each do |id|
 		dish << Dish.find_by(id: id).name
 	end
+	# send the confirmation mail to owner regarding order
 	Pony.mail({
 	:from => current_user.username,
 	:to => 'isha.negi19@gmail.com',
@@ -168,11 +186,13 @@ post '/securesession/:total' do
 	redirect to '/'
 end
 
+# shows the sign up page
 get '/signup' do
   # User.create(username: params[:username],email: params[:email], password: params[:password])
   erb :new
 end
 
+# creates the new user and save user in database
 post '/newuser' do
   @dish = Dish.all
 	@dishtype = DishType.all
@@ -201,6 +221,7 @@ post '/newuser' do
 
 end
 
+# delete items from cart
 get '/delete/:id' do
   index = @@order.index(params[:id])
   @@order.delete_at(index)

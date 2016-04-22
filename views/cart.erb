@@ -19,8 +19,15 @@
                 </div>
             </div>
             <form action="/checkout" method="post">
-            <button>Checkout</button>
+            <% if sum == 0 %>
+              <button id = "checkout" disabled="true">Checkout</button>
+            <% else %>
+              <button id = "checkout">Checkout</button>
+            <% end %>
           </form>
         </div>
     </div>
 </div>
+<scrip>
+
+</script>

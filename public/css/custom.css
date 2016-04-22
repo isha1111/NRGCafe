@@ -24,6 +24,7 @@ label {
 tr {
   text-align: center;
 }
+
 .glyphicon {
   cursor: pointer;
   font-size: 22px;
@@ -69,11 +70,15 @@ button {
 #navbar-toggle-login {
   display: inline;
   width: 30%;
+  position: absolute;
+  right: 0;
 }
 .navbar-toggle {
   display: inline;
 }
-
+#logoutBtn {
+  display: inline !important;
+}
 }
 .gallery-td {
   padding: 20px 20px;
