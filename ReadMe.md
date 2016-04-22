@@ -12,7 +12,8 @@ Ruby
 Sinatra
 HTML
 CSS
-
+ActiveRecord
+Postgres SQL
 
 GIT Hub Repo - https://github.com/isha1111/NRGCafe
 Heroku (Deployed app) - https://github.com/isha1111/NRGCafe
