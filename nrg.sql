@@ -62,3 +62,16 @@ INSERT INTO dish_types (dish_type) VALUES ('starter');
 INSERT INTO dish_types (dish_type) VALUES ('lunch');
 INSERT INTO dish_types(dish_type) VALUES ('salad');
 INSERT INTO dish_types(dish_type) VALUES ('kids');
+
+UPDATE dishes SET photo = '/img/garden-salad.jpg' where name = 'Garden Salad';
+UPDATE dishes SET photo = '/img/pumpkin-soup.jpg' where name = 'Pumpkin soup';
+UPDATE dishes SET photo = '/img/chicken-soup.jpg' where name = 'Chicken and veg soup';
+UPDATE dishes SET photo = '/img/fish-chips.jpg' where name = 'Kids fish chips';
+UPDATE dishes SET photo = '/img/spanish-eggs.jpg' where name = 'Spanish Eggs';
+UPDATE dishes SET photo = '/img/fruit-bowl.jpg' where name = 'Fruit Bowl';
+UPDATE dishes SET photo = '/img/parmigiana.jpg' where name = 'Chicken Parmigiana';
+UPDATE dishes SET photo = '/img/fruit-toast.jpg' where name = 'Fruit Toast';
+UPDATE dishes SET photo = '/img/fFettucine-Chicken-Avocado.jpg' where name = 'Fettucine Chicken Avocado';
+UPDATE dishes SET photo = '/img/Spaghetti-Chilli-Prawns.jpg' where name = 'Spaghetti Chilli Prawns';
+UPDATE dishes SET photo = '/img/Big-Breakfast.jpg' where name = 'Big Breakfast';
+UPDATE dishes SET photo = '/img/Fish-Chips.jpg' where name = 'Fish & Chips';
