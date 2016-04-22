@@ -127,7 +127,7 @@ end
 get '/securesession/:total' do
   @user = current_user
   dish = []
-	@total = params[:total].to_f
+	@total = params[:total].to_f * 100
   @@order.each do |id|
     dish << Dish.find_by(id: id).name
   end

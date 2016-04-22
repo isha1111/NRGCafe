@@ -75,10 +75,18 @@ button {
 }
 
 }
-
 .gallery-td {
   padding: 20px 20px;
   max-width: 300px;
   max-height: 200px;
   display: inline-block;
+}
+#back-top {
+width: 80px;
+height: 25px;
+padding: 10px;
+background-color:transparent;
+border-radius: 5px;
+text-align:center;
+color: black;
 }
