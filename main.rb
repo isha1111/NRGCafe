@@ -41,7 +41,7 @@ get '/contact' do
 end
 post '/contact' do
 	Pony.mail({
-:from => params[:email],
+	:from => params[:email],
   :to => 'isha.negi19@gmail.com',
   :subject => "Enquiry has been submitted!",
   :body => "#{params[:fname]} has made an enquiry. Please contact on number #{params[:phone]}",
