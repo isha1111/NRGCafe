@@ -3,6 +3,7 @@ require 'pg'
 require 'sinatra/flash'
 require 'pony'
 require 'httparty'
+require 'sinatra/reloader'
 
 require './db_config'
 require './models/user.rb'
@@ -226,4 +227,9 @@ get '/delete/:id' do
   index = @@order.index(params[:id])
   @@order.delete_at(index)
   erb :cart
+end
+
+# shows the booking page
+post '/booking' do
+	erb :booking
 end
