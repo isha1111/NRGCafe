@@ -13,7 +13,7 @@
                   <label class="label">Username</label>
                   <input type="text" name="username" required="true">
                   <label class="label">Email</label>
-                  <input type="text" name="email" required="true">
+                  <input type="email" name="email" required="true">
                   <label class="label">Password</label>
                   <input type="password" name="password" required="true"></br>
                   <button class = "label" id="create">Create Account</button>
@@ -23,12 +23,3 @@
        </div>
    </div>
 </div>
-<!-- validation -->
-<script  type="text/javascript">
-     var frmvalidator = new Validator("form1");
-     frmvalidator.addValidation("username","req","Please enter your First Name");
-     frmvalidator.addValidation("username","maxlen=20","Max length for Name is 20");
-     frmvalidator.addValidation("email","maxlen=50");
-     frmvalidator.addValidation("email","req");
-     frmvalidator.addValidation("email","email");
-</script>

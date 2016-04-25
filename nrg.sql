@@ -40,6 +40,15 @@ CREATE TABLE dish_orders(
   order_id INTEGER
 );
 
+CREATE TABLE reservations(
+  id serial4 PRIMARY KEY,
+  user_id INTEGER DEFAULT 0,
+  name VARCHAR(20),
+  email VARCHAR(50),
+  phone VARCHAR(20),
+  people VARCHAR(2),
+  date TIMESTAMP
+);
 
 INSERT INTO dishes(name,description,price,photo,dish_type_id) VALUES ('Spaghetti Chilli Prawns','Spaghetti with prawns salmon and parmeson crisps','16.90','','3');
 INSERT INTO dishes(name,description,price,photo,dish_type_id) VALUES ('Fettucine Chicken Avocado','Fettucine with Chicken,avocado and parmeson crisps','14.50','','3');

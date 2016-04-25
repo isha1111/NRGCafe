@@ -1,47 +1,63 @@
-<div class="container">
-    <div class="row">
-        <div class="box">
-            <div class="col-lg-12 text-center">
-                <div id="carousel-example-generic" class="carousel slide">
-                    <!-- Indicators -->
-                    <ol class="carousel-indicators hidden-xs">
-                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                    </ol>
+<section data-speed="2  " data-type="background"  class="bg-parallax" id="section1">
+    </br>
+    <h2 class="brand-before" style="color:black;text-align:center;">
+        <small style="color:black;text-align:center;">Welcome to</small>
+    </h2>
+    <h1 class="brand-name" style="color:black;text-align:center;">Cafè NRG</h1>
+    <hr class="tagline-divider">
+    <p style="font-family: 'Open Sans', sans-serif;text-align:center;">Mon-Fri: 6:30am to 4:30pm
+    </br>Sat-Sun: 7:30am to 4:30pm</p>
+</section>
+<div id="div1">
+  <img src="img/eat1.png">
+  <div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
 
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            <img class="img-responsive img-full" src="http://www.allfinancialservices.com.au/wp-content/uploads/2015/01/coffee.jpg" alt="" style="max-height:600px;">
-                        </div>
-                        <div class="item">
-                            <img class="img-responsive img-full" src="http://static1.squarespace.com/static/55e0b3d2e4b075a192d44dce/55e0c566e4b06a8d50dcea0c/55e0c5c0e4b01a33ae1162df/1440794121019/" alt="" style="max-height:600px;">
-                        </div>
-                        <div class="item">
-                            <img class="img-responsive img-full" src="http://s3-media4.fl.yelpcdn.com/bphoto/HGTuHtTlrDemGui6yf_C-w/o.jpg" alt="" style="max-height:600px;">
-                        </div>
-                    </div>
-
-                    <!-- Controls -->
-                    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                        <span class="icon-prev"></span>
-                    </a>
-                    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                        <span class="icon-next"></span>
-                    </a>
-                </div>
-                <h2 class="brand-before">
-                    <small>Welcome to</small>
-                </h2>
-                <h1 class="brand-name">Cafè NRG</h1>
-                <hr class="tagline-divider">
-                <h2>
-                    <small>
-                        <strong></strong>
-                    </small>
-                </h2>
-            </div>
-        </div>
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Make a Reservation</h4>
+      </div>
+      <div class="modal-body">
+        <form action="/reservation" method="post" id="form1">
+        <label class="label">Name</label>
+        <input type="text" name="name" required="true"></br>
+        <label class="label">Email</label>
+        <input type="email" name="email" required="true"></br>
+        <label class="label">Phone</label>
+        <input type="tel" name="phone" required="true"></br>
+        <label class="label">People</label>
+        <input type="number" name="people" required="true"></br>
+        <label class="label">Time</label>
+        <input type="datetime-local" name="time" required="true" style="width:200px;margin-left:7px;"></br>
+        <button class = "label" id="create" >Book now</button>
+        </form>
+      </div>
     </div>
+
+  </div>
 </div>
+
+</div>
+<section data-speed="11" data-type="background"  class="bg-parallax" id="section2" style="text-align:center">
+    <p style="color:white;font-weight:bold">Reserve a Table</p>
+    <p style="color:white;">
+      <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> 0393975257 or Click below
+    </p>
+    <button data-toggle="modal" data-target="#modal"><img src="img/reserve.png"></button>
+</section>
+
+<script>
+    $window = $(window);
+
+    $('section[data-type="background"]').each(function(){
+      // declare the variable to affect the defined data-type
+      var $scroll = $(this);
+       $(window).scroll(function() {
+         var yPos = -($window.scrollTop() / $scroll.data('speed'));
+         var coords = '50% '+ yPos + 'px';
+         $scroll.css({ backgroundPosition: coords });
+       });
+    });
+</script>

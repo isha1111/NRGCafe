@@ -11,6 +11,7 @@ require './models/dish.rb'
 require './models/dish_type.rb'
 require './models/order.rb'
 require './models/dish_order.rb'
+require './models/reservation.rb'
 
 @@order = []
 
@@ -230,6 +231,31 @@ get '/delete/:id' do
 end
 
 # shows the booking page
-post '/booking' do
-	erb :booking
+post '/reservation' do
+	Pony.mail({
+		:from => params[:email],
+	  :to => 'isha.negi19@gmail.com',
+	  :subject => "Table Reservation has been made!",
+	  :body => "#{params[:name]} has made a reservation for #{params[:people]} people on #{params[:time]}. Please contact on number #{params[:phone]} for any enquiries",
+	  :via => :smtp,
+	  :via_options => {
+	   :address              => 'smtp.gmail.com',
+	   :port                 => '587',
+	   :enable_starttls_auto => true,
+	   :user_name            => 'johnmann778@gmail.com',
+	   :password             => 'password18*',
+	   :authentication       => :plain,
+	   :domain               => "localhost.localdomain"
+	   }
+	})
+	flash[:notice] = "Reservation has been made!!. Thank you "
+	reservation = Reservation.new
+	reservation.user_id = session[:user_id]
+	reservation.name = params[:name]
+	reservation.email = params[:email]
+	reservation.phone = params[:phone]
+	reservation.people = params[:people]
+	reservation.date = params[:time]
+	reservation.save
+	redirect to '/'
 end
