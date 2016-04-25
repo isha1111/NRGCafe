@@ -3,7 +3,6 @@ require 'pg'
 require 'sinatra/flash'
 require 'pony'
 require 'httparty'
-require 'sinatra/reloader'
 
 require './db_config'
 require './models/user.rb'
