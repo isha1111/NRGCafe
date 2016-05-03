@@ -65,15 +65,17 @@
   })();
   </script>
 <!-- list of dishes -->
-<ul class="row first">
-    <li>
+<div class="row">
+    <ul>
       <% @dish.each do |dish| %>
       <% if dish.photo != "" %>
-        <img class="gallery-td" src= <%= dish.photo %> >
+        <li class="gallery">
+          <img class="gallery-td" src= <%= dish.photo %> >
+        </li>
       <% end %>
       <% end %>
-    </li>
-</ul>
+    </ul>
+</div>
 <!-- modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">

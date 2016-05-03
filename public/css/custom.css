@@ -1,4 +1,4 @@
-body {
+* {
   margin: 0 auto;
 }
 #section1 {
@@ -121,10 +121,16 @@ button {
 }
 }
 .gallery-td {
-  padding: 20px 20px;
-  max-width: 300px;
-  max-height: 200px;
-  display: inline-block;
+  width: 280px;
+  height: 250px;
+  margin: 5px 3px;
+}
+.gallery {
+  display: inline;
+}
+.row {
+  text-align: center;
+  width: 100%;
 }
 #back-top {
 width: 80px;
