@@ -97,12 +97,13 @@ get '/signin/recovery' do
 end
 
 # sends email to rest password to user
-post '/' do
+get '/signin/recovery/confirmation' do
+	erb :recovery
 	Pony.mail({
 	:from => 'isha.negi19@gmail.com',
 	:to => "#{params[:email]}",
 	:subject => "Reset Password link for your account with cafe NRG",
-	:body => "please visit http://nrgcafe.herokuapp.com/resetPassword/?#{params[:email]} to reset your password.",
+	:body => "please visit http://nrgcafe.herokuapp.com/resetPassword/#{params[:email]} to reset your password.",
 	:via => :smtp,
 	:via_options => {
 	 :address              => 'smtp.gmail.com',
@@ -114,9 +115,21 @@ post '/' do
 	 :domain               => "localhost.localdomain"
 	 }
 	})
+	flash[:notice] = "Reset password email has been sent to your email"
+	redirect to '/'
 end
 
-get '/resetPassword' do
+#  shows the screen for password reset
+get '/resetPassword/:email' do
+	erb :resetPassword
+end
+
+# update the password in database
+post '/resetPassword' do
+	user = User.find_by(email: params[:email])
+	user.password = params[:password]
+	user.save
+	flash[:notice] = "Your Password has been Updated"
 	redirect to '/'
 end
 

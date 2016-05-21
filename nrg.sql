@@ -19,7 +19,7 @@ CREATE TABLE dish_types(
 CREATE TABLE users(
   id serial4 PRIMARY KEY,
   username VARCHAR(10) NOT NULL,
-  email VARCHAR(20) NOT NULL,
+  email VARCHAR(50) NOT NULL,
   password_digest VARCHAR(100) NOT NULL
 );
 
