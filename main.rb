@@ -3,7 +3,6 @@ require 'pg'
 require 'sinatra/flash'
 require 'pony'
 require 'httparty'
-require 'sinatra/reloader'
 
 require './db_config'
 require './models/user.rb'
@@ -115,6 +114,10 @@ post '/' do
 	 :domain               => "localhost.localdomain"
 	 }
 	})
+end
+
+get '/resetPassword' do
+
 end
 
 # authenticate the user and logs them in otherwise redirects to same page and flash error
