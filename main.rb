@@ -98,12 +98,12 @@ end
 
 # sends email to rest password to user
 get '/signin/recovery/confirmation' do
-	erb :recovery
+	user = User.find_by(email: params[:email])
 	Pony.mail({
 	:from => 'isha.negi19@gmail.com',
 	:to => "#{params[:email]}",
 	:subject => "Reset Password link for your account with cafe NRG",
-	:body => "please visit http://nrgcafe.herokuapp.com/resetPassword/#{params[:email]} to reset your password.",
+	:body => "Your username is #{user.username} , please visit http://nrgcafe.herokuapp.com/resetPassword/#{params[:email]} to reset your password.",
 	:via => :smtp,
 	:via_options => {
 	 :address              => 'smtp.gmail.com',
