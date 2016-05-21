@@ -46,6 +46,11 @@
   color: white;
   text-decoration: none;
 }
+#forgot-password {
+  display:block;
+  font-size:12px;
+  padding-top:10px;
+}
 .layout-form {
   display: inline;
 }

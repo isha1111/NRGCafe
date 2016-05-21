@@ -3,6 +3,7 @@ require 'pg'
 require 'sinatra/flash'
 require 'pony'
 require 'httparty'
+require 'sinatra/reloader'
 
 require './db_config'
 require './models/user.rb'
@@ -89,6 +90,31 @@ end
 # shows the login page
 get '/signin' do
   erb :login
+end
+
+# password recovery page
+get '/signin/recovery' do
+	erb :recovery
+end
+
+# sends email to rest password to user
+post '/' do
+	Pony.mail({
+	:from => 'isha.negi19@gmail.com',
+	:to => "#{params[:email]}",
+	:subject => "Reset Password link for your account with cafe NRG",
+	:body => "please visit http://nrgcafe.herokuapp.com/resetPassword/?#{params[:email]} to reset your password.",
+	:via => :smtp,
+	:via_options => {
+	 :address              => 'smtp.gmail.com',
+	 :port                 => '587',
+	 :enable_starttls_auto => true,
+	 :user_name            => 'johnmann778@gmail.com',
+	 :password             => 'password18*',
+	 :authentication       => :plain,
+	 :domain               => "localhost.localdomain"
+	 }
+	})
 end
 
 # authenticate the user and logs them in otherwise redirects to same page and flash error
