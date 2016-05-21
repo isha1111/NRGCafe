@@ -117,7 +117,7 @@ post '/' do
 end
 
 get '/resetPassword' do
-
+	redirect to '/'
 end
 
 # authenticate the user and logs them in otherwise redirects to same page and flash error
